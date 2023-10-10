@@ -17,14 +17,15 @@ public class toDay_main_gui extends JFrame{
 	public void startframe() {
 		getContentPane().add(startP);
 	}
-	
+
 	public static void main(String[] args) {
 		toDay_main_gui main = new toDay_main_gui();
-		
-		main.startP = new startP(null);
-		
+
+		main.startP = new startP(main);
+		main.startframe();
+
 		main.add(main.startP);
-		
+
 		main.setResizable(false);
 		main.setVisible(true);
 		main.setPreferredSize(new Dimension(840,840/12*9));
@@ -39,18 +40,18 @@ public class toDay_main_gui extends JFrame{
 class startP extends JPanel{
 	private JButton btnStart;
 	private JButton  btnchange;
-	
+
 	private toDay_main_gui main;
-	
+
 	ImageIcon startbtn1 = new ImageIcon("./Button_Image/start_button_ver.1.png");
 	ImageIcon startbtn1_1 = new ImageIcon("./Button_Image/start_button_check_ver.1.png");
 	ImageIcon changebtn1 = new ImageIcon("./Button_Image/change_theme_ver.1.png");
 	ImageIcon changebtn1_1 = new ImageIcon("./Button_Image/change_theme_check_ver.1.png");
-	
-	public startP(JPanel win) {
+
+	public startP(toDay_main_gui main) {
 		this.main=main;
 		setLayout(null);
-		
+
 		btnStart = new JButton(startbtn1);
 		btnStart.setRolloverIcon(startbtn1_1);
 		btnStart.setBorderPainted(false);
@@ -58,7 +59,7 @@ class startP extends JPanel{
 		btnStart.setLocation(350, 420);
 		btnStart.setContentAreaFilled(false);
 		add(btnStart);
-		
+
 		btnchange = new JButton(changebtn1);
 		btnchange.setRolloverIcon(changebtn1_1);
 		btnchange.setBorderPainted(false);
@@ -66,43 +67,64 @@ class startP extends JPanel{
 		btnchange.setLocation(670, 515);
 		btnchange.setContentAreaFilled(false);
 		add(btnchange);
-		
+
 		btnStart.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new selectP1();
-				setVisible(false);
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 추가: SelectP1 패널을 화면에 추가
+            	setVisible(false);
+                main.getContentPane().add(new SelectP1(main));
+                main.revalidate();
+                main.repaint();
+            }
+        });
 	}
 }
- class selectP1 extends JPanel{
-	 private toDay_main_gui main;
-	 private JButton korean;
-	 private JButton western;
-	 private JButton chinese;
-	 private JButton japanese;
-	 
-	 
- }
+class SelectP1 extends JPanel {
+    private toDay_main_gui main;
+    private JButton korean;
+    private JButton western;
+    private JButton chinese;
+    private JButton japanese;
+     
+    private JButton select_btn_01;
+    private JButton  select_btn_02;
+    private JButton select_btn_03;
+    private JButton  select_btn_04;
+     
+    ImageIcon btn1_1 = new ImageIcon("./Button_Image/btn1_1.png");
+    ImageIcon btn1_1_1 = new ImageIcon("./Button_Image/btn1_1_1.png");
+     
+    public SelectP1(toDay_main_gui main) {
+        this.main = main;
+        setLayout(null);
+         
+        select_btn_01  = new JButton(btn1_1);
+        select_btn_01.setRolloverIcon(btn1_1_1);
+        select_btn_01.setBorderPainted(false);
+        select_btn_01.setSize(130, 57);
+        select_btn_01.setLocation(350, 420);
+        select_btn_01.setContentAreaFilled(false);
+        select_btn_01.setVisible(true);
+        add(select_btn_01);
+    }
+}
  class selectP2 extends JPanel{
 	 private toDay_main_gui main;
 	 private JButton rice;
 	 private JButton bread;
 	 private JButton noodle;
-	 
-	 
+
+
  }
  class selectP3 extends JPanel{
 	 private toDay_main_gui main;
 	 private JButton hot;
 	 private JButton cold;	 
-	 
+
  }
  class result extends JPanel{
 	 private toDay_main_gui main;
 	 private JButton add;
-	 
+
  }
- 
