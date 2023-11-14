@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,6 +15,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.input.CenterMapListener;
+import org.jxmapviewer.input.PanKeyListener;
+import org.jxmapviewer.input.PanMouseInputListener;
+import org.jxmapviewer.input.ZoomMouseWheelListenerCursor;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactoryInfo;
 
 public class toDay_main_gui extends JFrame{
 	public startP startP = null;
@@ -54,11 +65,13 @@ class startP extends JPanel{
 	ImageIcon startbtn1_1 = new ImageIcon("./Button_Image/start_button_check_ver.1.png");
 	ImageIcon changebtn1 = new ImageIcon("./Button_Image/change_theme_ver.1.png");
 	ImageIcon changebtn1_1 = new ImageIcon("./Button_Image/change_theme_check_ver.1.png");
+	
+	ImageIcon backgroundImage = new ImageIcon("./back_Image/start_bak_ver.1.png");
 
 	public startP(toDay_main_gui main) {
 		this.main=main;
 		setLayout(null);
-
+		
 		btnStart = new JButton(startbtn1);
 		btnStart.setRolloverIcon(startbtn1_1);
 		btnStart.setBorderPainted(false);
@@ -74,6 +87,12 @@ class startP extends JPanel{
 		btnchange.setLocation(670, 515);
 		btnchange.setContentAreaFilled(false);
 		add(btnchange);
+		
+		JLabel backgroundLabel = new JLabel();
+        backgroundLabel.setIcon(backgroundImage);
+        backgroundLabel.setSize(840,630);
+        backgroundLabel.setLocation(0, 0);
+        add(backgroundLabel);
 
 		btnStart.addActionListener(new ActionListener() {
             @Override
@@ -87,6 +106,7 @@ class startP extends JPanel{
         });
 	}
 }
+
 class selectP1 extends JPanel {
     private toDay_main_gui main;
     private JButton korean;
@@ -103,7 +123,9 @@ class selectP1 extends JPanel {
     ImageIcon btn1_3_1 = new ImageIcon("./Button_Image/btn1_3_1.png");
     ImageIcon btn1_4 = new ImageIcon("./Button_Image/btn1_4.png");
     ImageIcon btn1_4_1 = new ImageIcon("./Button_Image/btn1_4_1.png");
+    ImageIcon backgroundImage = new ImageIcon("./back_Image/select_bak_ver.1.png");
      
+    
     public selectP1(toDay_main_gui main) {
         this.main = main;
         setLayout(null);
@@ -143,6 +165,12 @@ class selectP1 extends JPanel {
         japanese.setContentAreaFilled(false);
         japanese.setVisible(true);
         add(japanese);
+        
+        JLabel backgroundLabel = new JLabel();
+        backgroundLabel.setIcon(backgroundImage);
+        backgroundLabel.setSize(840,630);
+        backgroundLabel.setLocation(0, 0);
+        add(backgroundLabel);
         
         korean.addActionListener(new ActionListener() {
             @Override
@@ -201,6 +229,7 @@ class selectP1 extends JPanel {
 	    ImageIcon btn1_2_1 = new ImageIcon("./Button_Image/btn2_2_1.png");
 	    ImageIcon btn1_3 = new ImageIcon("./Button_Image/btn2_3.png");
 	    ImageIcon btn1_3_1 = new ImageIcon("./Button_Image/btn2_3_1.png");
+	    ImageIcon backgroundImage = new ImageIcon("./back_Image/select_bak_ver.1.png");
 	 
 	 public selectP2(toDay_main_gui main, int category) {
 	        this.main = main;
@@ -210,7 +239,7 @@ class selectP1 extends JPanel {
 	        rice.setRolloverIcon(btn1_1_1);
 	        rice.setBorderPainted(false);
 	        rice.setSize(130, 70);
-	        rice.setLocation(80, 240);
+	        rice.setLocation(145, 240);
 	        rice.setContentAreaFilled(false);
 	        rice.setVisible(true);
 	        add(rice);
@@ -219,7 +248,7 @@ class selectP1 extends JPanel {
 	        bread.setRolloverIcon(btn1_2_1);
 	        bread.setBorderPainted(false);
 	        bread.setSize(130, 70);
-	        bread.setLocation(260, 240);
+	        bread.setLocation(355, 240);
 	        bread.setContentAreaFilled(false);
 	        bread.setVisible(true);
 	        add(bread);
@@ -228,10 +257,16 @@ class selectP1 extends JPanel {
 	        noodle.setRolloverIcon(btn1_3_1);
 	        noodle.setBorderPainted(false);
 	        noodle.setSize(130, 70);
-	        noodle.setLocation(440, 240);
+	        noodle.setLocation(565, 240);
 	        noodle.setContentAreaFilled(false);
 	        noodle.setVisible(true);
 	        add(noodle);
+	        
+	        JLabel backgroundLabel = new JLabel();
+	        backgroundLabel.setIcon(backgroundImage);
+	        backgroundLabel.setSize(840,630);
+	        backgroundLabel.setLocation(0, 0);
+	        add(backgroundLabel);
 	        
 	        rice.addActionListener(new ActionListener() {
 	            @Override
@@ -278,6 +313,7 @@ class selectP1 extends JPanel {
 	    ImageIcon btn1_1_1 = new ImageIcon("./Button_Image/btn3_1_1.png");
 	    ImageIcon btn1_2 = new ImageIcon("./Button_Image/btn3_2.png");
 	    ImageIcon btn1_2_1 = new ImageIcon("./Button_Image/btn3_2_1.png");
+	    ImageIcon backgroundImage = new ImageIcon("./back_Image/select_bak_ver.1.png");
 	 
 	 public selectP3(toDay_main_gui main, int category, int menuType) {
 	        this.main = main;
@@ -287,7 +323,7 @@ class selectP1 extends JPanel {
 	        hot.setRolloverIcon(btn1_1_1);
 	        hot.setBorderPainted(false);
 	        hot.setSize(130, 70);
-	        hot.setLocation(80, 240);
+	        hot.setLocation(210, 240);
 	        hot.setContentAreaFilled(false);
 	        hot.setVisible(true);
 	        add(hot);
@@ -296,10 +332,16 @@ class selectP1 extends JPanel {
 	        cold.setRolloverIcon(btn1_2_1);
 	        cold.setBorderPainted(false);
 	        cold.setSize(130, 70);
-	        cold.setLocation(260, 240);
+	        cold.setLocation(500, 240);
 	        cold.setContentAreaFilled(false);
 	        cold.setVisible(true);
 	        add(cold);
+	        
+	        JLabel backgroundLabel = new JLabel();
+	        backgroundLabel.setIcon(backgroundImage);
+	        backgroundLabel.setSize(840,630);
+	        backgroundLabel.setLocation(0, 0);
+	        add(backgroundLabel);
 	        
 	        hot.addActionListener(new ActionListener() {
 	            @Override
@@ -338,13 +380,50 @@ class selectP1 extends JPanel {
 
 	        resultLabel = new JLabel("추천 메뉴: " + getRecommendedMenu(main, category, menuType, temperature));
 	        resultLabel.setSize(1000, 50);
-	        resultLabel.setLocation(100, 150);
+	        resultLabel.setLocation(350, 90);
 	        add(resultLabel);
+	        
+	        ImageIcon backgroundImage = new ImageIcon("./back_Image/result_bak.png");
+	        
+	        JLabel backgroundLabel = new JLabel();
+	        backgroundLabel.setIcon(backgroundImage);
+	        backgroundLabel.setSize(840,630);
+	        backgroundLabel.setLocation(0, -15);
+	        add(backgroundLabel);
 	    }
+	    
+	    private void initMap() {
+	        JXMapViewer mapViewer = new JXMapViewer();
+
+	        // TileFactoryInfo 설정
+	        TileFactoryInfo info = new OSMTileFactoryInfo();
+	        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+	        mapViewer.setTileFactory(tileFactory);
+
+	        // 초기 위치 설정
+	        GeoPosition initPosition = new GeoPosition(37.5665, 126.9780); // 예시로 서울 시청 좌표 사용
+	        mapViewer.setAddressLocation(initPosition);
+
+	        // 이벤트 리스너 추가
+	        mapViewer.addMouseListener(new CenterMapListener(mapViewer));
+	        mapViewer.addMouseMotionListener(new PanMouseInputListener(mapViewer));
+	        mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
+	        mapViewer.addKeyListener(new PanKeyListener(mapViewer));
+
+	        // 지도 크기 및 위치 설정
+	        mapViewer.setSize(542, 332); // 크기 설정
+	        mapViewer.setLocation(15, 247); // 위치 설정
+
+	        this.add(mapViewer);
+	    }
+	    
 
 	    private String getRecommendedMenu(toDay_main_gui main, int category, int menuType, int temperature) {
 	        Random random = new Random();
 	        String recommendedMenu = "국밥";
+	        
+	        
+	        initMap(); // 지도 초기화 메서드 호출
 	        
 	        
 	        String[] koreanRiceHotMenu = {"국밥", "김치찌개", "된장찌개"};
@@ -356,7 +435,7 @@ class selectP1 extends JPanel {
 	        
 	        String[] westernRiceHotMenu = {"리소토", "크림 스프"};
 	        String[] westernRiceCoolMenu = {"리소토"};
-	        String[] westernBreadHotMenu = {"피자, 햄버거"};
+	        String[] westernBreadHotMenu = {"피자", "햄버거"};
 	        String[] westernBreadCoolMenu = {"파이", "햄버거"};
 	        String[] westernNoodleHotMenu = {"스파게티", "라자냐"};
 	        String[] westernNoodleCoolMenu = {"파스타 샐러드"};
