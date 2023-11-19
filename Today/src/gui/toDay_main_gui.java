@@ -381,7 +381,8 @@ class selectP1 extends JPanel {
 	    private JLabel resultLabel;
 	    private JLabel imageLabel;
 	    private HashMap<String, String> menuImages;
-
+	    private HashMap<String, GeoPosition> menuLocations;
+	    
 	    public result(toDay_main_gui main, int category, int menuType, int temperature) {
 	        this.main = main;
 	        setLayout(null);
@@ -439,6 +440,59 @@ class selectP1 extends JPanel {
 	        menuImages.put("라멘", "./foodImage/ramen.jpg");
 	        menuImages.put("냉소바", "./foodImaege/coolsoba.jpg");
 
+	        // 메뉴 이름과 가게 좌표 매핑
+	        menuLocations = new HashMap<>();
+	        menuLocations.put("국밥", new GeoPosition(37.47084, 126.933449));
+	        menuLocations.put("김치찌개", new GeoPosition(37.469621, 126.934532));
+	        menuLocations.put("된장찌개", new GeoPosition(37.469621, 126.934532));
+	        menuLocations.put("비빔밥", new GeoPosition(37.470161, 126.93344));
+	        menuLocations.put("찬물에 밥", new GeoPosition(37.465969, 126.931406));
+	        menuLocations.put("꽈배기", new GeoPosition(37.470871, 126.93411));
+	        menuLocations.put("찹쌀도넛", new GeoPosition(37.470871, 126.93411));
+	        menuLocations.put("찐빵", new GeoPosition(37.467769, 126.932142));
+	        menuLocations.put("떡볶이", new GeoPosition(37.467071, 126.9314));
+	        menuLocations.put("호두파이", new GeoPosition(37.470859, 126.933769));
+	        menuLocations.put("잔치국수", new GeoPosition(37.47243, 126.93520));
+	        menuLocations.put("칼국수", new GeoPosition(37.47243, 126.93520));
+	        menuLocations.put("물냉면", new GeoPosition(37.470759, 126.935821));
+	        menuLocations.put("비빔냉면", new GeoPosition(37.470759, 126.935821));
+	        
+	        menuLocations.put("리소토", new GeoPosition(37.470299, 126.934739));
+	        menuLocations.put("크림스프", new GeoPosition(37.469931, 126.934271));
+	        menuLocations.put("피자", new GeoPosition(37.470159, 126.933438));
+	        menuLocations.put("햄버거", new GeoPosition(37.470731, 126.933681));
+	        menuLocations.put("파이", new GeoPosition(37.470859, 126.933769));
+	        menuLocations.put("스파게티", new GeoPosition(37.470299, 126.934739));
+	        menuLocations.put("라자냐", new GeoPosition(37.48137, 126.928521));
+	        menuLocations.put("파스타 샐러드", new GeoPosition(37.5665, 126.9780));
+	        
+	        menuLocations.put("마파두부 덮밥", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("짬뽕밥", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("짜장밥", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("마라탕", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("볶음밥", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("만두", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("꽃빵", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("짜장면", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("짬뽕", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("울면", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("중국 냉면", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("냉짬뽕", new GeoPosition(37.468801, 126.93444));
+
+	        menuLocations.put("오야코동", new GeoPosition(37.48207, 126.89762));
+	        menuLocations.put("규동", new GeoPosition(37.472109, 126.934981));
+	        menuLocations.put("돈까스", new GeoPosition(37.46894, 126.934212));
+	        menuLocations.put("오므라이스", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("초밥", new GeoPosition(37.470419, 126.940348));
+	        menuLocations.put("타코야끼", new GeoPosition(37.480031, 126.927861));
+	        menuLocations.put("오코노미야끼", new GeoPosition(37.46858, 126.937751));
+	        menuLocations.put("당고", new GeoPosition(37.451848, 126.902003));
+	        menuLocations.put("만쥬", new GeoPosition(37.476441, 126.868402));
+	        menuLocations.put("우동", new GeoPosition(37.47014, 126.937561));
+	        menuLocations.put("온소바", new GeoPosition(37.477649, 126.963799));
+	        menuLocations.put("라멘", new GeoPosition(37.468631, 126.936809));
+	        menuLocations.put("냉소바", new GeoPosition(37.477649, 126.963799));
+	        
 	        resultLabel = new JLabel();
 	        resultLabel.setSize(1000, 50);
 	        resultLabel.setLocation(350, 90);
@@ -457,6 +511,10 @@ class selectP1 extends JPanel {
 	        // 추천 메뉴 결정
 	        String recommendedMenu = getRecommendedMenu(main, category, menuType, temperature);
 	        resultLabel.setText("추천 메뉴: " + recommendedMenu);
+	        
+	        // 메뉴에 따라 지도 위치 초기화
+	        GeoPosition position = menuLocations.getOrDefault(recommendedMenu, new GeoPosition(37.5665, 126.9780));
+	        initMap(position); // 여기서 위치 정보를 전달
 
 	        // 메뉴에 맞는 이미지 파일 경로 설정
 	        String imagePath = menuImages.getOrDefault(recommendedMenu, "./foodImage/example.jpg");
@@ -479,17 +537,21 @@ class selectP1 extends JPanel {
 	        add(backgroundLabel);
 	    }
 	    
-	    private void initMap() {
+	    private void showLocationOnMap(String menu) {
+	        GeoPosition position = menuLocations.getOrDefault(menu, new GeoPosition(37.5665, 126.9780)); // 기본 위치
+	        initMap(position);
+	    }
+	    
+	    private void initMap(GeoPosition position) {
 	        JXMapViewer mapViewer = new JXMapViewer();
 
 	        // TileFactoryInfo 설정
 	        TileFactoryInfo info = new OSMTileFactoryInfo();
 	        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
-	        mapViewer.setTileFactory(tileFactory);
+	        mapViewer.setTileFactory(tileFactory); 	
 
 	        // 초기 위치 설정
-	        GeoPosition initPosition = new GeoPosition(37.5665, 126.9780); // 예시로 서울 시청 좌표 사용
-	        mapViewer.setAddressLocation(initPosition);
+	        mapViewer.setAddressLocation(position);
 
 	        // 이벤트 리스너 추가
 	        mapViewer.addMouseListener(new CenterMapListener(mapViewer));
@@ -537,9 +599,6 @@ class selectP1 extends JPanel {
 	    private String getRecommendedMenu(toDay_main_gui main, int category, int menuType, int temperature) {
 	        Random random = new Random();
 	        String recommendedMenu = "국밥";
-	        
-	        
-	        initMap(); // 지도 초기화 메서드 호출
 	        
 	        
 	        String[] koreanRiceHotMenu = {"국밥", "김치찌개", "된장찌개"};
