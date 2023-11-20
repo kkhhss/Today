@@ -9,18 +9,29 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import org.jxmapviewer.JXMapViewer;
@@ -34,6 +45,10 @@ import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 
 public class toDay_main_gui extends JFrame{
+	public toDay_main_gui() {
+        result.loadMenuData(); // 메뉴 데이터 불러오기
+        // 나머지 생성자 코드 ...
+    }
 	public startP startP = null;
 	public startP selectP = null;
     public int category = -1;
@@ -383,9 +398,311 @@ class selectP1 extends JPanel {
 	    private HashMap<String, String> menuImages;
 	    private HashMap<String, GeoPosition> menuLocations;
 	    
+	 
+	 // 카테고리별 메뉴 리스트
+	    private static ArrayList<String> koreanRiceHotMenu = new ArrayList<>();
+	    private static ArrayList<String> koreanRiceCoolMenu = new ArrayList<>();
+        private static ArrayList<String> koreanBreadHotMenu = new ArrayList<>();
+        private static ArrayList<String> koreanBreadCoolMenu = new ArrayList<>();
+        private static ArrayList<String> koreanNoodleHotMenu = new ArrayList<>();
+        private static ArrayList<String> koreanNoodleCoolMenu = new ArrayList<>();
+
+        private static ArrayList<String> westernRiceHotMenu = new ArrayList<>();
+        private static ArrayList<String> westernRiceCoolMenu = new ArrayList<>();
+        private static ArrayList<String> westernBreadHotMenu = new ArrayList<>();
+        private static ArrayList<String> westernBreadCoolMenu = new ArrayList<>();
+        private static ArrayList<String> westernNoodleHotMenu = new ArrayList<>();
+        private static ArrayList<String> westernNoodleCoolMenu = new ArrayList<>();
+
+        private static ArrayList<String> ChineseRiceHotMenu = new ArrayList<>();
+        private static ArrayList<String> ChineseRiceCoolMenu = new ArrayList<>();
+        private static ArrayList<String> ChineseBreadHotMenu = new ArrayList<>();
+        private static ArrayList<String> ChineseBreadCoolMenu = new ArrayList<>();
+        private static ArrayList<String> ChineseNoodleHotMenu = new ArrayList<>();
+        private static ArrayList<String> ChineseNoodleCoolMenu = new ArrayList<>();
+
+        private static ArrayList<String> JapaneseRiceHotMenu = new ArrayList<>();
+        private static ArrayList<String> JapaneseRiceCoolMenu = new ArrayList<>();
+        private static ArrayList<String> JapaneseBreadHotMenu = new ArrayList<>();
+        private static ArrayList<String> JapaneseBreadCoolMenu = new ArrayList<>();
+        private static ArrayList<String> JapaneseNoodleHotMenu = new ArrayList<>();
+        private static ArrayList<String> JapaneseNoodleCoolMenu = new ArrayList<>();
+	    
+	    
+	    
+	    
 	    public result(toDay_main_gui main, int category, int menuType, int temperature) {
 	        this.main = main;
 	        setLayout(null);
+
+	        ImageIcon btn1_1 = new ImageIcon("./Button_Image/add.png");
+	        add  = new JButton(btn1_1);
+		    add.setBorderPainted(false);
+		    add.setSize(130, 50);
+		    add.setLocation(670, 540);
+		    add.setContentAreaFilled(false);
+		    add.setVisible(true);
+	        add(add);
+	        
+	        // 한식 텍스트 파일
+		    File file1 = new File("./menuText/한식밥뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file1))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            koreanRiceHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file2 = new File("./menuText/한식밥차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file2))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            koreanRiceCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file3 = new File("./menuText/한식빵뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file3))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            koreanBreadHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file4 = new File("./menuText/한식빵차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file4))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            koreanBreadCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file5 = new File("./menuText/한식면뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file5))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            koreanNoodleHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file6 = new File("./menuText/한식면차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file6))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            koreanNoodleCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    
+		    // 양식 텍스트 파일
+		    File file7 = new File("./menuText/양식밥뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file7))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            westernRiceHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file8 = new File("./menuText/양식밥차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file8))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            westernRiceCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file9 = new File("./menuText/양식빵뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file9))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            westernBreadHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file10 = new File("./menuText/양식빵차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file10))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            westernBreadCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file11 = new File("./menuText/양식면뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file11))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            westernNoodleHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file12 = new File("./menuText/양식면차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file12))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            westernNoodleCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    
+		    // 중식 텍스트 파일
+		    File file13 = new File("./menuText/중식밥뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file13))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            ChineseRiceHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file14 = new File("./menuText/중식밥차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file14))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            ChineseRiceCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file15 = new File("./menuText/중식빵뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file15))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            ChineseBreadHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file16 = new File("./menuText/중식빵차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file16))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            ChineseBreadCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file17 = new File("./menuText/중식면뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file17))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            ChineseNoodleHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file18 = new File("./menuText/중식면차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file18))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            ChineseNoodleCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    
+
+		    // 일식 텍스트 파일
+		    File file19 = new File("./menuText/일식밥뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file19))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            JapaneseRiceHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file20 = new File("./menuText/일식밥차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file20))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            JapaneseRiceCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file21 = new File("./menuText/일식빵뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file21))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            JapaneseBreadHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file22 = new File("./menuText/일식빵차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file22))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            JapaneseBreadCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file23 = new File("./menuText/일식면뜨거운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file23))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            JapaneseNoodleHotMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    File file24 = new File("./menuText/일식면차가운.txt");
+		    try (BufferedReader br = new BufferedReader(new FileReader(file24))) {
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            JapaneseNoodleCoolMenu.add(line);
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        // 오류 처리
+		    }
+		    
+		    
+	        add.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	            	setVisible(false);
+	            	main.getContentPane().add(new add(main, category, 2));
+	                main.revalidate();
+	                main.repaint();
+	            }
+	        });
 	        
 	        // 메뉴 이름과 이미지 파일 경로 매핑
 	        menuImages = new HashMap<>();
@@ -405,7 +722,7 @@ class selectP1 extends JPanel {
 	        menuImages.put("비빔냉면", "./foodImage/bibimnangmyun.jpg");
 	        
 	        menuImages.put("리소토", "./foodImage/risoto.jpg");
-	        menuImages.put("크림스프", "./foodImage/creamsoup.jpg");
+	        menuImages.put("크림 스프", "./foodImage/creamsoup.jpg");
 	        menuImages.put("피자", "./foodImage/pizza.jpg");
 	        menuImages.put("햄버거", "./foodImage/hamburger.jpg");
 	        menuImages.put("파이", "./foodImage/pie.jpg");
@@ -416,7 +733,6 @@ class selectP1 extends JPanel {
 	        menuImages.put("마파두부 덮밥", "./foodImage/mapatofu.jpg");
 	        menuImages.put("짬뽕밥", "./foodImage/jjambbongbab.jpg");
 	        menuImages.put("짜장밥", "./foodImage/jjajangbab.jpg");
-	        menuImages.put("마라탕", "./foodImage/maratang.jpg");
 	        menuImages.put("볶음밥", "./foodImage/bocembab.jpg");
 	        menuImages.put("만두", "./foodImage/mandu.jpg");
 	        menuImages.put("꽃빵", "./foodImage/flowerbread.jpg");
@@ -438,7 +754,7 @@ class selectP1 extends JPanel {
 	        menuImages.put("우동", "./foodImage/woodong.jpg");
 	        menuImages.put("온소바", "./foodImage/hotsoba.jpg");
 	        menuImages.put("라멘", "./foodImage/ramen.jpg");
-	        menuImages.put("냉소바", "./foodImaege/coolsoba.jpg");
+	        menuImages.put("냉소바", "./foodImage/coolsoba.jpg");
 
 	        // 메뉴 이름과 가게 좌표 매핑
 	        menuLocations = new HashMap<>();
@@ -458,7 +774,7 @@ class selectP1 extends JPanel {
 	        menuLocations.put("비빔냉면", new GeoPosition(37.470759, 126.935821));
 	        
 	        menuLocations.put("리소토", new GeoPosition(37.470299, 126.934739));
-	        menuLocations.put("크림스프", new GeoPosition(37.469931, 126.934271));
+	        menuLocations.put("크림 스프", new GeoPosition(37.469931, 126.934271));
 	        menuLocations.put("피자", new GeoPosition(37.470159, 126.933438));
 	        menuLocations.put("햄버거", new GeoPosition(37.470731, 126.933681));
 	        menuLocations.put("파이", new GeoPosition(37.470859, 126.933769));
@@ -466,18 +782,17 @@ class selectP1 extends JPanel {
 	        menuLocations.put("라자냐", new GeoPosition(37.48137, 126.928521));
 	        menuLocations.put("파스타 샐러드", new GeoPosition(37.5665, 126.9780));
 	        
-	        menuLocations.put("마파두부 덮밥", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("짬뽕밥", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("짜장밥", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("마라탕", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("볶음밥", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("만두", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("꽃빵", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("짜장면", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("짬뽕", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("울면", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("중국 냉면", new GeoPosition(37.468801, 126.93444));
-	        menuLocations.put("냉짬뽕", new GeoPosition(37.468801, 126.93444));
+	        menuLocations.put("마파두부 덮밥", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("짬뽕밥", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("짜장밥", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("볶음밥", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("만두", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("꽃빵", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("짜장면", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("짬뽕", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("울면", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("중국 냉면", new GeoPosition(37.46880, 126.93444));
+	        menuLocations.put("냉짬뽕", new GeoPosition(37.46880, 126.93444));
 
 	        menuLocations.put("오야코동", new GeoPosition(37.48207, 126.89762));
 	        menuLocations.put("규동", new GeoPosition(37.472109, 126.934981));
@@ -536,6 +851,93 @@ class selectP1 extends JPanel {
 	        backgroundLabel.setLocation(0, -15);
 	        add(backgroundLabel);
 	    }
+	    
+	    // 메뉴 데이터 불러오기 메소드
+	    static void loadMenuData() {
+	        String[] categories = {"한식", "양식", "중식", "일식"};
+	        String[] Types = {"밥", "빵", "면"};
+	        String[] Temperatures = {"뜨거운", "차가운"};
+	        for (String category : categories) {
+	        	for (String type : Types) {
+	        		for(String tem : Temperatures) {
+	        			File file = new File("./menuText/" + category + type + tem + ".txt");
+	        			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+	        				String line;
+	        				while ((line = br.readLine()) != null) {
+	        					if (category.equals("한식")) {
+	        				        if (type.equals("밥") && tem.equals("뜨거운")) {
+	        				            koreanRiceHotMenu.add(line);
+	        				        } else if (type.equals("밥") && tem.equals("차가운")) {
+	        				            koreanRiceCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("빵") && tem.equals("뜨거운")) {
+	        				            koreanBreadHotMenu.add(line);
+	        				        } else if (type.equals("빵") && tem.equals("차가운")) {
+	        				            koreanBreadCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("면") && tem.equals("뜨거운")) {
+	        				            koreanNoodleHotMenu.add(line);
+	        				        } else if (type.equals("면") && tem.equals("차가운")) {
+	        				            koreanNoodleCoolMenu.add(line);
+	        				        }
+	        				    } else if (category.equals("양식")) {
+	        				        if (type.equals("밥") && tem.equals("뜨거운")) {
+	        				            westernRiceHotMenu.add(line);
+	        				        } else if (type.equals("밥") && tem.equals("차가운")) {
+	        				            westernRiceCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("빵") && tem.equals("뜨거운")) {
+	        				            westernBreadHotMenu.add(line);
+	        				        } else if (type.equals("빵") && tem.equals("차가운")) {
+	        				            westernBreadCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("면") && tem.equals("뜨거운")) {
+	        				            westernNoodleHotMenu.add(line);
+	        				        } else if (type.equals("면") && tem.equals("차가운")) {
+	        				            westernNoodleCoolMenu.add(line);
+	        				        }
+	        				    } else if (category.equals("중식")) {
+	        				        if (type.equals("밥") && tem.equals("뜨거운")) {
+	        				            ChineseRiceHotMenu.add(line);
+	        				        } else if (type.equals("밥") && tem.equals("차가운")) {
+	        				            ChineseRiceCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("빵") && tem.equals("뜨거운")) {
+	        				            ChineseBreadHotMenu.add(line);
+	        				        } else if (type.equals("빵") && tem.equals("차가운")) {
+	        				            ChineseBreadCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("면") && tem.equals("뜨거운")) {
+	        				            ChineseNoodleHotMenu.add(line);
+	        				        } else if (type.equals("면") && tem.equals("차가운")) {
+	        				            ChineseNoodleCoolMenu.add(line);
+	        				        }
+	        				    } else if (category.equals("일식")) {
+	        				        if (type.equals("밥") && tem.equals("뜨거운")) {
+	        				            JapaneseRiceHotMenu.add(line);
+	        				        } else if (type.equals("밥") && tem.equals("차가운")) {
+	        				            JapaneseRiceCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("빵") && tem.equals("뜨거운")) {
+	        				            JapaneseBreadHotMenu.add(line);
+	        				        } else if (type.equals("빵") && tem.equals("차가운")) {
+	        				            JapaneseBreadCoolMenu.add(line);
+	        				        }
+	        				        if (type.equals("면") && tem.equals("뜨거운")) {
+	        				            JapaneseNoodleHotMenu.add(line);
+	        				        } else if (type.equals("면") && tem.equals("차가운")) {
+	        				            JapaneseNoodleCoolMenu.add(line);
+	        				        }
+	        				    }
+	        				}
+	        			} catch (IOException e) {
+	        				e.printStackTrace();
+	        			}
+	        		}
+	        	}
+	        }
+	    }
+	    
 	    
 	    private void showLocationOnMap(String menu) {
 	        GeoPosition position = menuLocations.getOrDefault(menu, new GeoPosition(37.5665, 126.9780)); // 기본 위치
@@ -600,179 +1002,190 @@ class selectP1 extends JPanel {
 	        Random random = new Random();
 	        String recommendedMenu = "국밥";
 	        
+	        ArrayList<String> targetList = null;
+
+	        if (category == 0) { // 한식
+	            if (menuType == 0) { // 밥
+	                targetList = (temperature == 0) ? koreanRiceHotMenu : koreanRiceCoolMenu;
+	            } else if (menuType == 1) { // 빵
+	                targetList = (temperature == 0) ? koreanBreadHotMenu : koreanBreadCoolMenu;
+	            } else if (menuType == 2) { // 면
+	                targetList = (temperature == 0) ? koreanNoodleHotMenu : koreanNoodleCoolMenu;
+	            }
+	        } else if (category == 1) { // 양식
+	        	if (menuType == 0) { // 밥
+	                targetList = (temperature == 0) ? westernRiceHotMenu : westernRiceCoolMenu;
+	            } else if (menuType == 1) { // 빵
+	                targetList = (temperature == 0) ? westernBreadHotMenu : westernBreadCoolMenu;
+	            } else if (menuType == 2) { // 면
+	                targetList = (temperature == 0) ? westernNoodleHotMenu : westernNoodleCoolMenu;
+	            }
+	        } else if (category == 2) { // 양식
+	        	if (menuType == 0) { // 밥
+	                targetList = (temperature == 0) ? ChineseRiceHotMenu : ChineseRiceCoolMenu;
+	            } else if (menuType == 1) { // 빵
+	                targetList = (temperature == 0) ? ChineseBreadHotMenu : ChineseBreadCoolMenu;
+	            } else if (menuType == 2) { // 면
+	                targetList = (temperature == 0) ? ChineseNoodleHotMenu : ChineseNoodleCoolMenu;
+	            }
+	        } else if (category == 3) { // 양식
+	        	if (menuType == 0) { // 밥
+	                targetList = (temperature == 0) ? JapaneseRiceHotMenu : JapaneseRiceCoolMenu;
+	            } else if (menuType == 1) { // 빵
+	                targetList = (temperature == 0) ? JapaneseBreadHotMenu : JapaneseBreadCoolMenu;
+	            } else if (menuType == 2) { // 면
+	                targetList = (temperature == 0) ? JapaneseNoodleHotMenu : JapaneseNoodleCoolMenu;
+	            }
+	        }
+	       
+	       // ArrayList에서 무작위 메뉴 선택
+	       if (targetList != null && !targetList.isEmpty()) {
+	           int randomIndex = random.nextInt(targetList.size());
+	           recommendedMenu = targetList.get(randomIndex);
+	       }
+
+	       return recommendedMenu;
+	    }
+	    
+	 // 메뉴 추가 메서드
+	    public static void addMenu(String menuName, String category, String menuType, String temperature) {
 	        
-	        String[] koreanRiceHotMenu = {"국밥", "김치찌개", "된장찌개"};
-	        String[] koreanRiceCoolMenu = {"비빔밥", "찬물에 밥"};
-	        String[] koreanBreadHotMenu = {"꽈배기", "찹쌀도넛", "찐빵", "떡볶이"};
-	        String[] koreanBreadCoolMenu = {"호두파이"};
-	        String[] koreanNoodleHotMenu = {"잔치국수", "칼국수"};
-	        String[] koreanNoodleCoolMenu = {"물냉면", "비빔냉면"};
-	        
-	        String[] westernRiceHotMenu = {"리소토", "크림 스프"};
-	        String[] westernRiceCoolMenu = {"리소토"};
-	        String[] westernBreadHotMenu = {"피자", "햄버거"};
-	        String[] westernBreadCoolMenu = {"파이", "햄버거"};
-	        String[] westernNoodleHotMenu = {"스파게티", "라자냐"};
-	        String[] westernNoodleCoolMenu = {"파스타 샐러드"};
-	        
-	        String[] ChineseRiceHotMenu = {"마파두부 덮밥", "짬뽕밥", "짜장밥", "마라탕"};
-	        String[] ChineseRiceCoolMenu = {"볶음밥"};
-	        String[] ChineseBreadHotMenu = {"만두", "꽃빵"};
-	        String[] ChineseBreadCoolMenu = {"만두", "꽃빵"};
-	        String[] ChineseNoodleHotMenu = {"짜장면", "짬뽕", "울면"};
-	        String[] ChineseNoodleCoolMenu = {"중국 냉면", "냉짬뽕"};
-
-	        String[] JapaneseRiceHotMenu = {"오야코동", "규동", "돈까스", "오므라이스"};
-	        String[] JapaneseRiceCoolMenu = {"초밥"};
-	        String[] JapaneseBreadHotMenu = {"타코야끼", "오코노미야끼"};
-	        String[] JapaneseBreadCoolMenu = {"타코야끼", "당고", "만쥬"};
-	        String[] JapaneseNoodleHotMenu = {"우동", "온소바", "라멘"};
-	        String[] JapaneseNoodleCoolMenu = {"냉소바"};
-
-
-	       if(category == 0) {
-	                if (menuType == 0) {
-	                	// 밥 메뉴
-	                    if (temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = koreanRiceHotMenu[random.nextInt(koreanRiceHotMenu.length)];
-	                    }
-	                    else if(temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = koreanRiceCoolMenu[random.nextInt(koreanRiceCoolMenu.length)];
-	                    }
-	                } 
-	                else if (menuType == 1) {
-	                    // 빵 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = koreanBreadHotMenu[random.nextInt(koreanBreadHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = koreanBreadCoolMenu[random.nextInt(koreanBreadCoolMenu.length)];
-	                    }
-	                }
-	                else if ( menuType == 2) {
-	                    // 면 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = koreanNoodleHotMenu[random.nextInt(koreanNoodleHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = koreanNoodleCoolMenu[random.nextInt(koreanNoodleCoolMenu.length)];
-	                    }
-	                }
-	       }
-	       else if( category==1) {
-	                if ( menuType == 0) {
-	                    // 밥 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = westernRiceHotMenu[random.nextInt(westernRiceHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = westernRiceCoolMenu[random.nextInt(westernRiceCoolMenu.length)];
-	                    }
-	                } 
-	                else if ( menuType == 1) {
-	                    // 빵 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = westernBreadHotMenu[random.nextInt(westernBreadHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = westernBreadCoolMenu[random.nextInt(westernBreadCoolMenu.length)];
-	                    }
-	                }
-	                else if ( menuType == 2) {
-	                    // 면 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = westernNoodleHotMenu[random.nextInt(westernNoodleHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = westernNoodleCoolMenu[random.nextInt(westernNoodleCoolMenu.length)];
-	                    }
-	                }
-	       }
-	       else if( category == 2) {
-	            	if ( menuType == 0) {
-	                    // 밥 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = ChineseRiceHotMenu[random.nextInt(ChineseRiceHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = ChineseRiceCoolMenu[random.nextInt(ChineseRiceCoolMenu.length)];
-	                    }
-	                } 
-	                else if ( menuType == 1) {
-	                    // 빵 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = ChineseBreadHotMenu[random.nextInt(ChineseBreadHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = ChineseBreadCoolMenu[random.nextInt(ChineseBreadCoolMenu.length)];
-	                    }
-	                }
-	                else if ( menuType == 2) {
-	                    // 면 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = ChineseNoodleHotMenu[random.nextInt(ChineseNoodleHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = ChineseNoodleCoolMenu[random.nextInt(ChineseNoodleCoolMenu.length)];
-	                    }
-	                }
-	       }
-	       else if( category == 3) {
-	                if ( menuType == 0) {
-	                    // 밥 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = JapaneseRiceHotMenu[random.nextInt(JapaneseRiceHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = JapaneseRiceCoolMenu[random.nextInt(JapaneseRiceCoolMenu.length)];
-	                    }
-	                } 
-	                else if ( menuType == 1) {
-	                    // 빵 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = JapaneseBreadHotMenu[random.nextInt(JapaneseBreadHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = JapaneseBreadCoolMenu[random.nextInt(JapaneseBreadCoolMenu.length)];
-	                    }
-	                }
-	                else if ( menuType == 2) {
-	                    // 면 메뉴
-	                    if ( temperature == 0) {
-	                    	// 뜨거움
-		                    recommendedMenu = JapaneseNoodleHotMenu[random.nextInt(JapaneseNoodleHotMenu.length)];
-	                    }
-	                    else if( temperature == 1) {
-	                    	// 차가움
-		                    recommendedMenu = JapaneseNoodleCoolMenu[random.nextInt(JapaneseNoodleCoolMenu.length)];
-	                    }
-	                } 
-	       }
-
-	        return recommendedMenu;
+	        // 파일에 메뉴 추가 로직
+	        try (FileWriter fw = new FileWriter("./menuText/" + category + menuType + temperature + ".txt", true);
+	             BufferedWriter bw = new BufferedWriter(fw);
+	             PrintWriter out = new PrintWriter(bw)) {
+	            out.println(menuName);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 	    }
 	}
+
  
+ class add extends JPanel{
+	 private toDay_main_gui main;
+	 
+	 ImageIcon backgroundImage = new ImageIcon("./back_Image/add_bak.png");
+	 
+	 public add(toDay_main_gui main, int category, int menuType) {
+	        this.main = main;
+	        setLayout(null);
+	        
+	        JLabel QLabel = new JLabel();
+	        QLabel.setSize(1000, 50);
+	        QLabel.setLocation(325, 80);
+	        add(QLabel);
+	        
+	        QLabel.setText("어떤 메뉴를 추가하고 싶으신가요?");
+	        
+	     // 라디오버튼 생성
+	        JRadioButton koreanButton = new JRadioButton("한식");
+	        JRadioButton westernButton = new JRadioButton("양식");
+	        JRadioButton chineseButton = new JRadioButton("중식");
+	        JRadioButton japaneseButton = new JRadioButton("일식");
+	        JRadioButton riceButton = new JRadioButton("밥");
+	        JRadioButton breadButton = new JRadioButton("빵");
+	        JRadioButton noodleButton = new JRadioButton("면");
+	        JRadioButton hotButton = new JRadioButton("따뜻한");
+	        JRadioButton coldButton = new JRadioButton("시원한");
+
+	        // 라디오버튼 그룹 생성
+	        ButtonGroup categoryGroup = new ButtonGroup();
+	        categoryGroup.add(koreanButton);
+	        categoryGroup.add(westernButton);
+	        categoryGroup.add(chineseButton);
+	        categoryGroup.add(japaneseButton);
+
+	        ButtonGroup menuTypeGroup = new ButtonGroup();
+	        menuTypeGroup.add(riceButton);
+	        menuTypeGroup.add(breadButton);
+	        menuTypeGroup.add(noodleButton);
+
+	        ButtonGroup temperatureGroup = new ButtonGroup();
+	        temperatureGroup.add(hotButton);
+	        temperatureGroup.add(coldButton);
+
+	        // 라디오버튼 위치 설정
+	        koreanButton.setBounds(160, 220, 100, 30);
+	        westernButton.setBounds(160,280, 100, 30);
+	        chineseButton.setBounds(160,340, 100, 30);
+	        japaneseButton.setBounds(160, 400, 100, 30);
+	        riceButton.setBounds(360, 250, 100, 30);
+	        breadButton.setBounds(360, 310, 100, 30);
+	        noodleButton.setBounds(360, 370, 100, 30);
+	        hotButton.setBounds(560, 280, 100, 30);
+	        coldButton.setBounds(560, 340, 100, 30);
+
+	        // 텍스트 필드 및 버튼 생성 및 위치 설정
+	        JTextField menuNameField = new JTextField();
+	        menuNameField.setBounds(280, 500, 200, 30);
+	        JButton submitButton = new JButton("추가");
+	        submitButton.setBounds(490, 500, 80, 30);
+	        
+	        submitButton.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                String menuName = menuNameField.getText();
+	                String selectedCategory = "";
+	                String selectedType = "";
+	                String selectedTem = "";
+	                
+	                if (koreanButton.isSelected()) {
+	                    selectedCategory = "한식";
+	                } else if (westernButton.isSelected()) {
+	                    selectedCategory = "양식";
+	                } else if (chineseButton.isSelected()) {
+	                    selectedCategory = "중식";
+	                } else if (japaneseButton.isSelected()) {
+	                    selectedCategory = "일식";
+	                }
+	                
+	                if (riceButton.isSelected()) {
+	                	selectedType="밥";
+	                } else if (breadButton.isSelected()) {
+	                	selectedType="빵";
+	                } else if (noodleButton.isSelected()) {
+	                	selectedType="면";
+	                }
+	                
+	                if (hotButton.isSelected()) {
+	                	selectedTem="뜨거운";
+	                } else if (coldButton.isSelected()) {
+	                	selectedTem="차가운";
+	                }
+	                
+	                result.addMenu(menuName, selectedCategory, selectedType, selectedTem);
+	                
+	                
+	                // 메뉴 추가 후 팝업 메시지 표시
+	                JOptionPane.showMessageDialog(main, "메뉴가 추가되었습니다.");
+
+	                // 프로그램 종료
+	                System.exit(0);
+	            }
+	        });
+
+	        // 컴포넌트 추가
+	        add(koreanButton);
+	        add(westernButton);
+	        add(chineseButton);
+	        add(japaneseButton);
+	        add(riceButton);
+	        add(breadButton);
+	        add(noodleButton);
+	        add(hotButton);
+	        add(coldButton);
+	        add(menuNameField);
+	        add(submitButton);
+	        
+	        JLabel backgroundLabel = new JLabel();
+	        backgroundLabel.setIcon(backgroundImage);
+	        backgroundLabel.setSize(840,630);
+	        backgroundLabel.setLocation(0, 0);
+	        add(backgroundLabel);
+
+	        
+	    }
+
+ }
  
